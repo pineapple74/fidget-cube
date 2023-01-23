@@ -1,6 +1,8 @@
 input.onButtonPressed(Button.A, function () {
-    sprite.delete()
-    isSprite = 0
+    if (isSprite == 1) {
+        sprite.delete()
+        isSprite = 0
+    }
     for (let index = 0; index < 20; index++) {
         basic.showLeds(`
             . . . . .
@@ -103,7 +105,7 @@ input.onGesture(Gesture.LogoUp, function () {
 })
 input.onGesture(Gesture.TiltLeft, function () {
     if (isSprite == 1) {
-        sprite.move(-1)
+        sprite.change(LedSpriteProperty.X, -1)
     }
 })
 input.onButtonPressed(Button.AB, function () {
@@ -111,25 +113,28 @@ input.onButtonPressed(Button.AB, function () {
     sprite = game.createSprite(2, 2)
 })
 input.onButtonPressed(Button.B, function () {
-    sprite.delete()
-    isSprite = 0
-    for (let index = 0; index < 8; index++) {
+    if (isSprite == 1) {
+        sprite.delete()
+        isSprite = 0
+    }
+    for (let index = 0; index < 20; index++) {
         basic.showLeds(`
             # # # # #
             . . # . .
             . . # . .
             . . # . .
             . . # . .
-            `,10)
+            `,180)
 basic.showLeds(`
-            # . . # .
-            # . . # .
-            # # # # .
-            # . . # .
-            # . . # .
-            `,10)
+            # . . . #
+            # . . . #
+            # # # # #
+            # . . . #
+            # . . . #
+            `,180)
     }
-    Flip_a_coin = randint(1, 2)
+    basic.showString("",5)
+Flip_a_coin = randint(1, 2)
     if (Flip_a_coin == 1) {
         basic.showString("Heads")
     } else if (Flip_a_coin == 2) {
@@ -138,7 +143,7 @@ basic.showLeds(`
 })
 input.onGesture(Gesture.TiltRight, function () {
     if (isSprite == 1) {
-        sprite.move(1)
+        sprite.change(LedSpriteProperty.X, 1)
     }
 })
 input.onGesture(Gesture.LogoDown, function () {
@@ -147,10 +152,33 @@ input.onGesture(Gesture.LogoDown, function () {
     }
 })
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
-    sprite.delete()
-    isSprite = 0
+    if (isSprite == 1) {
+        sprite.delete()
+        isSprite = 0
+    }
+    basic.showLeds(`
+        . . . . .
+        . # . . .
+        . . # . .
+        . . . # #
+        # . . . .
+        `)
     music.playMelody("C C F F E E D D ", 120)
+    basic.showLeds(`
+        . . . . .
+        . . . # .
+        . . # . #
+        . # . . .
+        # . . . .
+        `)
     music.playMelody("D D E F G G A G ", 120)
+    basic.showLeds(`
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        `)
 })
 let Flip_a_coin = 0
 let Roll_a_dice = 0
